@@ -7,12 +7,12 @@ pipeline {
 
   stages {
     stage('Verify downloads') {
-    checkout scm
     agent { label 'mob-e2e-mac-01' }
         options {
             lock("mob-e2e-android-01")
         }
       steps {
+        checkout scm
         sh '''
           set -euo pipefail
           chmod +x verify_download.sh
@@ -22,12 +22,12 @@ pipeline {
     }
 
     stage('Enterprise tests (EE + EE-KTX)') {
-        checkout scm
     agent { label 'mob-e2e-mac-01' }
         options {
             lock("mob-e2e-android-01")
         }
       steps {
+        checkout scm
         sh '''
           set -euo pipefail
           chmod +x run_cbl_test.sh
@@ -37,12 +37,12 @@ pipeline {
     }
 
     stage('Community tests (CE + CE-KTX)') {
-        checkout scm
     agent { label 'mob-e2e-mac-01' }
         options {
             lock("mob-e2e-android-01")
         }
       steps {
+        checkout scm
         sh '''
           set -euo pipefail
           chmod +x run_cbl_test.sh
