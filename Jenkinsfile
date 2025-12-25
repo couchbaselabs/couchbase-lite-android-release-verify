@@ -13,8 +13,8 @@ pipeline {
         }
       steps {
         checkout scm
+        pwd
         sh '''
-          pwd
           set -euo pipefail
           chmod +x verify_download.sh
           ./verify_download.sh "$CBL_VERSION"
