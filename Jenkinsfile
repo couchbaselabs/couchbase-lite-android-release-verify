@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent none
 
   parameters {
     string(name: 'CBL_VERSION', defaultValue: '4.0.2', description: 'Couchbase Lite version')
@@ -7,6 +7,10 @@ pipeline {
 
   stages {
     stage('Verify downloads') {
+    agent { label 'mob-e2e-mac-01' }
+        options {
+            lock("mob-e2e-android-01")
+        }
       steps {
         sh '''
           set -euo pipefail
@@ -17,6 +21,10 @@ pipeline {
     }
 
     stage('Enterprise tests (EE + EE-KTX)') {
+    agent { label 'mob-e2e-mac-01' }
+        options {
+            lock("mob-e2e-android-01")
+        }
       steps {
         sh '''
           set -euo pipefail
@@ -27,6 +35,10 @@ pipeline {
     }
 
     stage('Community tests (CE + CE-KTX)') {
+    agent { label 'mob-e2e-mac-01' }
+        options {
+            lock("mob-e2e-android-01")
+        }
       steps {
         sh '''
           set -euo pipefail
