@@ -13,8 +13,13 @@ pipeline {
         }
       steps {
         checkout scm
-        pwd
         sh '''
+            echo "WORKSPACE=$WORKSPACE"
+            echo "PWD=$(pwd)"
+            echo "Listing workspace:"
+            ls -la
+            echo "Does script exist?"
+            ls -la verify_download.sh || true
           set -euo pipefail
           chmod +x verify_download.sh
           ./verify_download.sh "$CBL_VERSION"
