@@ -15,8 +15,6 @@ pipeline {
       steps {
         sh '''
           set -euo pipefail
-            pwd
-          ls -la
           chmod +x verify_download.sh
           ./verify_download.sh "$CBL_VERSION"
         '''
