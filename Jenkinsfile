@@ -14,15 +14,9 @@ pipeline {
       steps {
         checkout scm
         sh '''
-            echo "WORKSPACE=$WORKSPACE"
-            echo "PWD=$(pwd)"
-            echo "Listing workspace:"
-            ls -la
-            echo "Does script exist?"
-            ls -la verify_download.sh || true
           set -euo pipefail
-          chmod +x verify_download.sh
-          ./verify_download.sh "$CBL_VERSION"
+          chmod +x verify_android.sh
+          ./verify_android.sh "$CBL_VERSION"
         '''
       }
     }
